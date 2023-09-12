@@ -1,6 +1,6 @@
 package com.crochepoint.html;
 
-import com.crochepoint.abstracts.HtmlComponent;
+import com.crochepoint.entities.HtmlComponent;
 
 public class Html extends HtmlComponent {
     private String title = "Chroche pontos";
@@ -12,14 +12,15 @@ public class Html extends HtmlComponent {
     public String toString() {
         return "<!DOCTYPE html>"
             + "<html lang=\"pt-br\">"
-            + "<head>"
-            + "    <meta charset=\"UTF-8\">"
-            + "    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">"
-            + "    <title>" + title + "</title>"
-            + "</head>"
-            + "<body>"
-            + super.getChildrenToString()
-            + "</body>"
+                + "<head>"
+                    + "<meta charset=\"UTF-8\">"
+                    + "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">"
+                    + "<title>" + title + "</title>"
+                    + "<script src=\"https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js\"></script>"
+                + "</head>"
+                + "<body>"
+                    + super.getChildrenToString()
+                + "</body>"
             + "</html>";
     }
 }
