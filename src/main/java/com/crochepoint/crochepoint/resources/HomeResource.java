@@ -1,7 +1,6 @@
 package com.crochepoint.crochepoint.resources;
 
 import java.io.IOException;
-import java.io.Serializable;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import org.springframework.http.ResponseEntity;
@@ -11,12 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
+import com.crochepoint.crochepoint.staticPage.Home;
 import com.crochepoint.entities.TimeStartEndPointCrocheList;
-import com.crochepoint.html.ButtonExternalRequest;
-import com.crochepoint.html.Div;
-import com.crochepoint.html.Html;
-import com.crochepoint.html.Script;
-import com.crochepoint.html.TagA;
 
 @RestController
 @RequestMapping(value="/")
@@ -25,38 +20,7 @@ public class HomeResource {
 
     @GetMapping("/")
     public ResponseEntity<String> home() {
-        Html html = new Html("Página inicial");
-
-
-
-        Div dv1 = new Div();
-        ButtonExternalRequest buttonStart = new ButtonExternalRequest("START", "/start");
-        dv1.add(buttonStart);
-
-        Div dv2 = new Div();
-        ButtonExternalRequest buttonEnd= new ButtonExternalRequest("END", "/end");
-        dv2.add(buttonEnd);
-
-        Div dv3 = new Div();
-
-        Script sc = new Script("const ev = new EventSource(\"/timeresponse\");"
-                + "ev.onmessage = function(ev) {"
-                    + "const data = JSON.parse(ev.data);"
-                    // + "console.log(data);"
-                    + "const infos = " + dv3.getHTMLQueryElement()
-                    + "infos.innerHTML = JSON.stringify(data, null, 4).replace(/\\n/g,'<br \\/>').replace(/ /g,'&nbsp;');"
-                + "}\n"
-                + "ev.onerror = function(event) {"
-                    + "console.error(\"Erro na conexão SSE:\", event);"
-                + "};"
-                );
-
-        html.add(dv1);
-        html.add(dv2);
-        html.add(dv3);
-        html.add(sc);
-
-        return ResponseEntity.ok().body(html.toString());
+        return ResponseEntity.ok().body(new Home().toString());
     }
 
     @GetMapping(value="/start")

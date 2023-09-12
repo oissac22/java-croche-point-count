@@ -40,5 +40,13 @@ public class TimeStartEndPointCrocheList implements Serializable {
         started = false;
         return lastTime;
     }
+
+    public long getTotalPassedTime() {
+        long total = 0;
+        for (TimeStartEndPointCroche t:listTimes) {
+            total += t.getTimePassed();
+        }
+        return total;
+    }
     
 }
