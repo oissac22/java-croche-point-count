@@ -7,20 +7,7 @@ import com.crochepoint.entities.HtmlComponent;
 
 public class Table extends HtmlComponent {
 
-    private static boolean styleOk = false;
-
     private List<String> titles = new ArrayList<>();
-
-    private static String getStyle() {
-        if (styleOk) {
-            return "";
-        }
-        styleOk = true;
-        return "<style>\n"
-                + "table { width: 100%; border-collapse: collapse; }\n"
-                + "table th, table td { border: solid 1px #aaa; padding: 10px; font-weight:16px; }\n"
-            + "</style>";
-    }
 
     public void addTitle(String title) {
         titles.add(title);
@@ -33,8 +20,7 @@ public class Table extends HtmlComponent {
             titleAndTr.append("<th>" + t + "</th>");
         }
 
-        return getStyle()
-            + "<table id='"+getId()+"'>"
+        return "<table id='"+getId()+"'>"
                 + "<thead>"
                     + titleAndTr.toString()
                 + "</thead>"
