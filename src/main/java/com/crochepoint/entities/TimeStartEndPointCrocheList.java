@@ -78,6 +78,7 @@ public class TimeStartEndPointCrocheList implements Serializable {
         try {
             ps.setString(1, getId());
             ResultSet rs = ps.executeQuery();
+            boolean verifyStarted = false;
             while(rs.next()) {
                 String idObj = rs.getString("id");
                 String _ts = rs.getString("timeStart");
@@ -85,8 +86,11 @@ public class TimeStartEndPointCrocheList implements Serializable {
                 Instant timeStart = _ts == null ? null : Instant.parse(_ts);
                 Instant timeEnd = _te == null ? null :Instant.parse(_te);
                 TimeStartEndPointCroche tsepc = new TimeStartEndPointCroche(idObj, timeStart, timeEnd, id);
+                lastTime = tsepc;
                 listTimes.add(tsepc);
+                verifyStarted = (timeStart != null) && (timeEnd == null);
             }
+            started = verifyStarted;
             databaseLoadedList = true;
         } catch (SQLException e) {
             throw new DBException(e.getMessage());
