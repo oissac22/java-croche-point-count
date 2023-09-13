@@ -17,6 +17,12 @@ import com.crochepoint.entities.TimeStartEndPointCrocheList;
 @RequestMapping(value="/")
 public class HomeResource {
     private final CopyOnWriteArrayList<SseEmitter> emitters = new CopyOnWriteArrayList<>();
+    private TimeStartEndPointCrocheList list;
+
+    private void startList() {
+        if (list == null)
+            list = TimeStartEndPointCrocheList.loadLastTime();
+    }
 
     @GetMapping("/")
     public ResponseEntity<String> home() {
@@ -25,14 +31,14 @@ public class HomeResource {
 
     @GetMapping(value="/start")
     public ResponseEntity<String> startTime() {
-        TimeStartEndPointCrocheList list = new TimeStartEndPointCrocheList();
+        startList();
         list.start();
         return ResponseEntity.ok().build();
     }
 
     @GetMapping(value="/end")
     public ResponseEntity<String> endTime() {
-        TimeStartEndPointCrocheList list = new TimeStartEndPointCrocheList();
+        startList();
         list.end();
         return ResponseEntity.ok().build();
     }
@@ -52,8 +58,8 @@ public class HomeResource {
     @Scheduled(fixedRate = 1000)
     public void sendUpdates() {
         for (SseEmitter emitter: emitters) {
+            startList();
             try {
-                TimeStartEndPointCrocheList list = new TimeStartEndPointCrocheList();
                 emitter.send(list);
             } catch (IOException e) {
                 System.out.println(e.getMessage());
