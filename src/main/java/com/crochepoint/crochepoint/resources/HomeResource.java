@@ -55,6 +55,12 @@ public class HomeResource {
         return emitter;
     }
 
+    @GetMapping("/new")
+    public ResponseEntity<String> NewTimeList() {
+        list = TimeStartEndPointCrocheList.newTime();
+        return ResponseEntity.ok().build();
+    }
+
     @Scheduled(fixedRate = 1000)
     public void sendUpdates() {
         for (SseEmitter emitter: emitters) {

@@ -12,12 +12,19 @@ public class Home {
         Html html = new Html("Página inicial");
 
         Div divButtonStart = new Div();
-        ButtonExternalRequest buttonStart = new ButtonExternalRequest("START", "/start");
+        ButtonExternalRequest buttonStart = new ButtonExternalRequest("START (S)", "/start");
+        buttonStart.atalho = 's';
         divButtonStart.add(buttonStart);
 
         Div divButtonEnd = new Div();
-        ButtonExternalRequest buttonEnd= new ButtonExternalRequest("END", "/end");
+        ButtonExternalRequest buttonEnd= new ButtonExternalRequest("END (E)", "/end");
+        buttonEnd.atalho = 'e';
         divButtonEnd.add(buttonEnd);
+
+        Div divButtonNew = new Div();
+        ButtonExternalRequest buttonNew = new ButtonExternalRequest("NOVA LISTA DE CONTAGEM", "/new");
+        buttonNew.confirmClick = "Deseja limpar tudo e iniciar uma nova lista de contagem?";
+        divButtonNew.add(buttonNew);
 
         Div divTableList = new Div();
         Table tbl = new Table();
@@ -58,6 +65,7 @@ public class Home {
         html.add(divTableList);
         html.add(divTotalTime);
         html.add(sc);
+        html.add(divButtonNew);
 
         return html.toString();
     }

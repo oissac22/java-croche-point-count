@@ -22,7 +22,7 @@ public class Html extends HtmlComponent {
                     + "<script src=\"https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js\"></script>"
                 + "</head>"
                 + "<style>"
-                + "body { display:flex; flex-direction: column; gap:10px; font-family:Verdana, Arial; background-color: "+bgColor+"; color:"+textColor+" }"
+                + "body { display:flex; flex-direction: column; gap:20px; font-family:Verdana, Arial; background-color: "+bgColor+"; color:"+textColor+" }"
                 + "button { border:none; padding:10px 20px; border-radius:4px; cursor:pointer; background-color: #07a; color:"+textColor+" }"
                 + "table { width: 100%; border-collapse: collapse; }"
                 + "table th, table td { border: solid 1px #aaa; padding: 10px; font-weight:16px; color:"+Html.getTextColor()+"; }"

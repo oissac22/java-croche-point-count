@@ -32,3 +32,4 @@ build/
 ### VS Code ###
 .vscode/
 sample.db
+crochepoint.jar

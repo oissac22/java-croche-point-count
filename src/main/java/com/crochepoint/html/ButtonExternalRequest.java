@@ -6,6 +6,9 @@ public class ButtonExternalRequest extends HtmlComponent {
     
     private String caption = "";
     private String url = "";
+    
+    public char atalho = '\0';
+    public String confirmClick = null;
 
     public String messageSuccess = "Processo efetuado com sucesso";
 
@@ -19,10 +22,21 @@ public class ButtonExternalRequest extends HtmlComponent {
             "{"
                 + "const bt = " + this.getHTMLQueryElement()
                 + "bt.addEventListener('click', () => {"
+                    + (
+                        confirmClick == null ? "" :
+                        "if(!confirm(`" + confirmClick + "`)) return;"
+                    )
                     + "axios.get('" + url + "')"
                         + ".then(result => console.log(`" + messageSuccess + "`))"
                         + ".catch(e => alert(e));"
                 + "});"
+                + (
+                    atalho == '\0' ? "" :
+                    "window.addEventListener('keyup', e => {"
+                        + "if (e.key === '"+atalho+"')"
+                            + "bt.click();"
+                    + "})"
+                )
             + "}"
         );
 
