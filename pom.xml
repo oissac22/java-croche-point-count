@@ -40,6 +40,10 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<source>11</source> <!-- Set your desired Java version here -->
+					<target>11</target> <!-- Set your desired Java version here -->
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
